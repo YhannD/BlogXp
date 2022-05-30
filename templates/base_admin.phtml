@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administration</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    
+    <!-- inclusion éventuelle de fichiers JavaScript propres à la page courante --> 
+    <?php if (isset($script)): ?>
+        <?=$script;?>
+    <?php endif; ?>
+    <!-- ou bien carrément <?=$script??''?> -->
+</head>
+<body>
+    <header>
+        <h1>Dashboard Administration</h1>
+        <nav>
+            <a href="home.php">Accueil</a>
+            <?php if (UserModel::isConnected()): ?>
+                <a href="admin.php">Admin Dashboard</a>
+                <a href="add_article.php">Ajouter un article</a>
+                <span><?=htmlspecialchars(UserModel::getUserFirstname());?> <?=htmlspecialchars(UserModel::getUserLastname());?></span>
+                <a href="logout.php">Déconnexion</a>
+            <?php else: ?>
+                <a href="login.php">Connexion</a>
+                <a href="signup.php">Créer un compte</a>
+            <?php endif; ?>
+        </nav>
+    </header>
+    <main>
+        <?php include '../templates/' . $template . '.phtml'; ?>
+    </main>
+</body>
+</html>

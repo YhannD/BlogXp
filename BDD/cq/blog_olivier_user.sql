@@ -1,0 +1,3 @@
+insert into blog_olivier.user (idUser, nomUser, preUser, mailUser, pwdHasheUser, dtUser, roleUser)
+values  (1, 'Grain de riz', 'Shangai', 'admin@admin.com', '$2y$10$vSXfxvJKKBoImM2Nb3UB9u/s/iz4LTHpj57EOyiu3fKsmh2W/Fvy2', '2022-03-20 00:00:00', 'ADMIN'),
+        (2, 'aixplora', 'admin', 'admin@mail.com', '$2y$10$OY9ztItLTblqNiurI80Ba.9O6m2Egk8UsKecIxD74rOIpbKY.wPPa', '2022-03-20 00:00:00', 'Admin');

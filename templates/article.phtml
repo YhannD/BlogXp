@@ -1,0 +1,53 @@
+<article>
+    <h2><?= htmlspecialchars($article['libArt']); ?></h2>
+    <small>Créé le <?= (new DateTimeImmutable($article['dtArt']))->format('d/m/Y'); ?></small>
+
+    <?php if ($article['imgArt']): ?>
+        <img src="images/<?= htmlspecialchars($article['imgArt']); ?>" alt="">
+    <?php endif; ?>
+
+    <?php if ($article['resArt']): ?>
+        <p><?= htmlspecialchars($article['resArt']); ?></p>
+    <?php endif; ?>
+
+    <p><?= htmlspecialchars($article['txtArt']); ?></p>
+</article>
+
+<!--Affichage du formulaire-->
+<section>
+    <h3>Commentaires</h3>
+    <?php if(isConnected()): ?>
+    <form action="article.php?id=<?= $idArticle; ?>" method="POST">
+        <fieldset>
+            <legend>Poster un commentaire</legend>
+            <div>
+                <label for="content">Votre commentaire</label><br>
+                <textarea name="content" id="content"></textarea>
+
+                <!-- message d'erreur le cas échéant -->
+                <?php if (isset($errors['content'])): ?>
+                    <p><?= htmlspecialchars($errors['content']); ?></p>
+                <?php endif; ?>
+            </div>
+        </fieldset>
+        <input type="submit" value="Enregistrer">
+    </form>
+    <?php else : ?>
+        <div>Connecte toi pour lacher un commentaire</div>
+        <div><a href="signup.php">Enregistre toi</a></div>
+        <div><a href="login.php">Connecte toi!</a></div>
+
+    <?php endif; ?>
+
+    <?php if (!$comments): ?> <!--On vérifie s'il on a des commentaires-->
+        <p>Soyez le premier à poster un commentaire</p>
+    <?php else: ?>
+        <?php foreach ($comments as $comment): ?>
+            <article>
+                <h4>Posté par <?= $comment['preUser'] . ' ' . $comment['nomUser']; ?></h4>
+                <small>le <?= (new DateTimeImmutable($comment['dtCom']))->format('d/m/Y à H\hi'); ?></small>
+                <p><?= $comment['libCom']; ?></p>
+            </article>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</section>
